@@ -24,6 +24,28 @@ class User extends Authenticatable
     ];
 
     /**
+     * Relationships
+     */
+
+    // User -> Profile (One to One)
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // User -> Portfolios (One to Many)
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
+
+    // User -> Skills (Many to Many)
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class)->withTimestamps();
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
@@ -46,3 +68,8 @@ class User extends Authenticatable
         ];
     }
 }
+
+
+
+
+
