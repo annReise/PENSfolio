@@ -2,59 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
-
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Tampilkan ringkasan profil (internal).
      */
-    public function edit(Request $request): View
+    public function index()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+         /** @var User $user */
+        $user = auth()->user();
+        $profile = $user->profile;
+
+        return view('profile.index', [
+            'user'    => $user,
+            'profile' => $profile,
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Form edit profil.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function edit()
     {
-        $request->user()->fill($request->validated());
+        /** @var User $user */
+        $user = auth()->user();
+        $profile = $user->profile ?? new Profile();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        return view('profile.edit', [
+            'user'    => $user,
+            'profile' => $profile,
+        ]);
+    }
+
+    /**
+     * Simpan perubahan profil (username, headline, bio, avatar, link, dll).
+     */
+    public function update(Request $request)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'username' => 'required|string|max:50|unique:profiles,username,' . optional($user->profile)->id,
+            'headline' => 'nullable|string|max:255',
+            'bio'      => 'nullable|string',
+            'website'  => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
+            'github'   => 'nullable|url|max:255',
+            'avatar'   => 'nullable|image|max:2048',
+        ]);
+
+        // handle avatar upload
+        $avatarPath = $user->profile->avatar ?? null;
+
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
         }
 
-        $request->user()->save();
+        $profileData = [
+            'username' => $validated['username'],
+            'headline' => $validated['headline'] ?? null,
+            'bio'      => $validated['bio'] ?? null,
+            'website'  => $validated['website'] ?? null,
+            'linkedin' => $validated['linkedin'] ?? null,
+            'github'   => $validated['github'] ?? null,
+            'avatar'   => $avatarPath,
+        ];
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
+        $user->profile()
+            ->updateOrCreate(
+                ['user_id' => $user->id],
+                $profileData
+            );
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()
+            ->route('profile.index')
+            ->with('success', 'Profil berhasil diperbarui.');
     }
 }

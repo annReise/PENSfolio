@@ -3,11 +3,12 @@
 
         <h1 class="text-2xl font-bold mb-4">Edit Portofolio</h1>
 
-        <form method="POST" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label class="font-semibold">Nama Proyek</label>
-                <input type="text" class="w-full p-3 border rounded-lg">
-            </div>
+        <form method="POST" action="{{ route('portfolio.update', $portfolio) }}" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    {{-- isi input + value dari $portfolio --}}
+</form>
+
 
             <div class="mb-4">
                 <label class="font-semibold">Deskripsi</label>

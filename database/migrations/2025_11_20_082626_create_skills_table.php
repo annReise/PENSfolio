@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('skills', function (Blueprint $table) {
-        $table->id();
-        $table->string('name')->unique();
-        $table->string('category')->nullable(); // misal: programming, soft-skill
-        $table->timestamps();
-    });
-        Schema::table('skills', function (Blueprint $table) {
-            $table->index(['name', 'category']);
-        });
+    $table->id();
+    $table->string('name')->unique();
+    $table->string('category')->nullable(); // misal: programming, soft-skill
+    $table->timestamps();
+});
+Schema::table('skills', function (Blueprint $table) {
+    $table->index(['name', 'category']);
+});
+
     }
 
     /**

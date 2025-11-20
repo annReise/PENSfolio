@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Portfolio extends Model
 {
@@ -17,6 +17,7 @@ class Portfolio extends Model
         'image',
     ];
 
+    // Relasi ke User
     public function user()
     {
         return $this->belongsTo(User::class);

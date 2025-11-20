@@ -3,11 +3,11 @@
 
         <h1 class="text-2xl font-bold mb-4">Tambah Portofolio</h1>
 
-        <form method="POST" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label class="font-semibold">Nama Proyek</label>
-                <input type="text" class="w-full p-3 border rounded-lg">
-            </div>
+        <form method="POST" action="{{ route('portfolio.store') }}" enctype="multipart/form-data">
+    @csrf
+    {{-- isi input sama seperti punyamu, tambahkan name="title" dll --}}
+</form>
+
 
             <div class="mb-4">
                 <label class="font-semibold">Deskripsi</label>

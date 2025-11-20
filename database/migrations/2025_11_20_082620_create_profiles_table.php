@@ -12,20 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->string('username')->unique();
-        $table->string('headline')->nullable(); // tagline singkat
-        $table->text('bio')->nullable();
-        $table->string('avatar')->nullable(); // path foto
-        $table->string('website')->nullable();
-        $table->string('linkedin')->nullable();
-        $table->string('github')->nullable();
-        $table->timestamps();
-    });
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->index(['user_id', 'username']);
-        }); 
+    $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->string('username')->unique();
+    $table->string('headline')->nullable(); // tagline singkat
+    $table->text('bio')->nullable();
+    $table->string('avatar')->nullable(); // path foto
+    $table->string('website')->nullable();
+    $table->string('linkedin')->nullable();
+    $table->string('github')->nullable();
+    $table->timestamps();
+});
+Schema::table('profiles', function (Blueprint $table) {
+    $table->index(['user_id', 'username']);
+}); 
+
     }
 
     /**
