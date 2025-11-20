@@ -1,29 +1,30 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+    <div class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+        <h1 class="text-2xl font-bold mb-4">Edit Profil</h1>
+
+        <form>
+
+            <div class="mb-4">
+                <label class="font-semibold">Foto Profil</label>
+                <input type="file" class="w-full p-3 border rounded-lg">
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+            <div class="mb-4">
+                <label class="font-semibold">Nama Lengkap</label>
+                <input type="text" class="w-full p-3 border rounded-lg">
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+            <div class="mb-4">
+                <label class="font-semibold">Tentang Saya</label>
+                <textarea class="w-full p-3 border rounded-lg" rows="5"></textarea>
             </div>
-        </div>
+
+            <button class="px-6 py-3 bg-yellow-600 text-white rounded-lg">
+                Simpan Perubahan
+            </button>
+
+        </form>
+
     </div>
 </x-app-layout>

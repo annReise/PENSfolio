@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PENSfolio</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    {{-- HEADER --}}
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-600">
+                PENSfolio
+            </div>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            <ul class="flex gap-6 font-medium">
+                <li><a href="/dashboard" class="{{ request()->is('dashboard') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Dashboard</a></li>
+                <li><a href="/portfolio" class="{{ request()->is('portfolio*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Portofolio</a></li>
+                <li><a href="/skills" class="{{ request()->is('skills*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Keahlian</a></li>
+                <li><a href="/profile" class="{{ request()->is('profile*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+    {{-- MAIN CONTENT --}}
+    <main class="py-8 flex-grow">
+        {{ $slot }}
+    </main>
+
+    {{-- FOOTER --}}
+    <footer class="bg-gray-900 text-white text-center py-4 mt-10">
+        <p>PENSfolio © {{ date('Y') }} - All rights reserved</p>
+    </footer>
+
+</body>
 </html>
