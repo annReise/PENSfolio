@@ -1,33 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Daftar Mahasiswa')
 
 @section('content')
-    @if(session('success'))
-        <div class="mb-4 px-4 py-2 bg-green-100 text-green-700 rounded">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white p-4 rounded shadow">
-            <p class="text-sm text-gray-500">Total User</p>
-            <p class="text-3xl font-bold">{{ $totalUsers }}</p>
-        </div>
-
-        <div class="bg-white p-4 rounded shadow">
-            <p class="text-sm text-gray-500">Admin</p>
-            <p class="text-3xl font-bold">{{ $totalAdmins }}</p>
-        </div>
-
-        <div class="bg-white p-4 rounded shadow">
-            <p class="text-sm text-gray-500">Mahasiswa</p>
-            <p class="text-3xl font-bold">{{ $totalMahasiswa }}</p>
-        </div>
-    </div>
-
     <div class="bg-white p-4 rounded shadow">
-        <h2 class="font-semibold mb-3">User Terbaru</h2>
+        <h2 class="font-semibold mb-4">Semua User</h2>
+
         <table class="w-full text-sm">
             <thead>
                 <tr class="border-b">
@@ -38,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($recentUsers as $u)
+                @foreach($users as $u)
                     <tr class="border-b">
                         <td class="py-2">{{ $u->name }}</td>
                         <td class="py-2">{{ $u->email }}</td>
@@ -53,5 +31,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-4">
+            {{ $users->links() }}
+        </div>
     </div>
 @endsection
