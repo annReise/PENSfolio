@@ -34,6 +34,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    Route::put('password', [PasswordController::class, 'update'])
+    ->name('password.update');
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -55,10 +59,16 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
+    Route::get('/password/edit', function () {
+        return view('auth.change-password');
+    })->name('password.edit');
+
     Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
     return redirect('/login');
 })->name('logout');
+
+    
 });

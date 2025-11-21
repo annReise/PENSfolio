@@ -1,98 +1,106 @@
 <x-app-layout>
-    <div class="max-w-4xl mx-auto p-6">
-
+    <div class="max-w-5xl mx-auto py-8 px-4">
         {{-- HEADER PROFIL --}}
-        <div class="text-center mb-6">
-            <img
-                src="{{ $profile?->avatar_path ? asset('storage/'.$profile->avatar_path) : 'https://via.placeholder.com/150' }}"
-                class="mx-auto rounded-full w-32 h-32 object-cover"
-                alt="Foto {{ $profile->full_name ?? $user->name }}"
-            >
+        <div class="bg-white rounded-xl shadow p-6 flex flex-col md:flex-row gap-6">
+            @php
+                $avatarUrl = $profile->avatar
+                    ? asset('storage/'.$profile->avatar)
+                    : 'https://via.placeholder.com/150';
+            @endphp
 
-            <h1 class="text-3xl font-bold mt-4">
-                {{ $profile->full_name ?? $user->name }}
-            </h1>
+            <img src="{{ $avatarUrl }}"
+                 alt="{{ $user->name }}"
+                 class="w-32 h-32 rounded-full object-cover">
 
-            <p class="text-gray-600">
-                {{ $profile->study_program ?? 'Program Studi belum diisi' }}
-            </p>
+            <div class="flex-1">
+                <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
+                <p class="text-gray-500 text-sm">
+                    {{ $profile->headline ?? 'Mahasiswa PENS' }}
+                </p>
 
-            {{-- Link sosial opsional --}}
-            <div class="flex justify-center gap-4 mt-3 text-sm">
-                @if ($profile?->website)
-                    <a href="{{ $profile->website }}" target="_blank" class="text-blue-600 underline">
-                        Website
-                    </a>
-                @endif
+                <p class="mt-3 text-sm text-gray-700">
+                    {{ $profile->bio ?? 'Belum ada deskripsi.' }}
+                </p>
 
-                @if ($profile?->linkedin)
-                    <a href="{{ $profile->linkedin }}" target="_blank" class="text-blue-600 underline">
-                        LinkedIn
-                    </a>
-                @endif
-
-                @if ($profile?->github)
-                    <a href="{{ $profile->github }}" target="_blank" class="text-blue-600 underline">
-                        GitHub
-                    </a>
-                @endif
+                <div class="mt-4 flex flex-wrap gap-3 text-sm text-indigo-700">
+                    @if($profile->website)
+                        <a href="{{ $profile->website }}" target="_blank" class="underline">
+                            Website
+                        </a>
+                    @endif
+                    @if($profile->linkedin)
+                        <a href="{{ $profile->linkedin }}" target="_blank" class="underline">
+                            LinkedIn
+                        </a>
+                    @endif
+                    @if($profile->github)
+                        <a href="{{ $profile->github }}" target="_blank" class="underline">
+                            GitHub
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
 
-        {{-- TENTANG SAYA --}}
-        <h2 class="text-xl font-bold mb-2">Tentang Saya</h2>
-        <p class="text-gray-700 mb-6">
-            {{ $profile?->bio ?? 'Mahasiswa ini belum menuliskan deskripsi dirinya.' }}
-        </p>
+        {{-- SKILLS --}}
+        <div class="mt-8 bg-white rounded-xl shadow p-6">
+            <h2 class="text-xl font-semibold mb-3">Keahlian</h2>
+            @if($skills->isEmpty())
+                <p class="text-sm text-gray-500">Belum menambahkan keahlian.</p>
+            @else
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($skills as $skill)
+                        <span class="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs rounded-full">
+                            {{ $skill->name }}
+                            @if($skill->pivot?->level)
+                                <span class="text-[10px] text-gray-500 ml-1">
+                                    (Level {{ $skill->pivot->level }})
+                                </span>
+                            @endif
+                        </span>
+                    @endforeach
+                </div>
+            @endif
+        </div>
 
         {{-- PORTFOLIO --}}
-        <h2 class="text-xl font-bold mb-3">Portofolio</h2>
+        <div class="mt-8 bg-white rounded-xl shadow p-6">
+            <h2 class="text-xl font-semibold mb-3">Portofolio Proyek</h2>
+            @if($portfolios->isEmpty())
+                <p class="text-sm text-gray-500">Belum menambahkan proyek portofolio.</p>
+            @else
+                <div class="grid md:grid-cols-2 gap-6">
+                    @foreach ($portfolios as $portfolio)
+                        <div class="border rounded-lg overflow-hidden">
+                            @if($portfolio->image)
+                                <img src="{{ asset('storage/'.$portfolio->image) }}"
+                                     alt="{{ $portfolio->title }}"
+                                     class="w-full h-40 object-cover">
+                            @else
+                                <div class="w-full h-40 bg-gray-100 flex items-center justify-center text-sm text-gray-400">
+                                    Tanpa Gambar
+                                </div>
+                            @endif
 
-        @if ($portfolios->isEmpty())
-            <p class="text-gray-500 mb-6">Belum ada portofolio yang ditampilkan.</p>
-        @else
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                @foreach ($portfolios as $portfolio)
-                    <div class="bg-white p-4 rounded-xl shadow">
-                        <img
-                            src="{{ $portfolio->thumbnail_path ? asset('storage/'.$portfolio->thumbnail_path) : 'https://via.placeholder.com/300x180' }}"
-                            class="rounded-lg mb-3 w-full h-44 object-cover"
-                            alt="{{ $portfolio->title }}"
-                        >
-                        <h3 class="font-bold text-lg">{{ $portfolio->title }}</h3>
-                        <p class="text-gray-600 text-sm mb-2">
-                            {{ \Illuminate\Support\Str::limit($portfolio->description, 120) }}
-                        </p>
+                            <div class="p-4 space-y-2">
+                                <h3 class="font-semibold text-gray-800">{{ $portfolio->title }}</h3>
+                                @if($portfolio->description)
+                                    <p class="text-sm text-gray-700">
+                                        {{ $portfolio->description }}
+                                    </p>
+                                @endif
 
-                        @if ($portfolio->project_url)
-                            <a href="{{ $portfolio->project_url }}"
-                               target="_blank"
-                               class="text-blue-600 text-sm underline">
-                                Lihat Proyek
-                            </a>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        @endif
-
-        {{-- SKILL --}}
-        <h2 class="text-xl font-bold mt-4 mb-3">Keahlian</h2>
-
-        @if ($skills->isEmpty())
-            <p class="text-gray-500">Belum ada skill yang ditambahkan.</p>
-        @else
-            <div class="flex flex-wrap gap-2">
-                @foreach ($skills as $skill)
-                    <span class="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm">
-                        {{ $skill->name }}
-                        @if ($skill->category)
-                            <span class="text-xs text-gray-500">({{ $skill->category }})</span>
-                        @endif
-                    </span>
-                @endforeach
-            </div>
-        @endif
-
+                                @if($portfolio->link)
+                                    <a href="{{ $portfolio->link }}" target="_blank"
+                                       class="text-xs text-indigo-600 underline">
+                                        Lihat Proyek
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
     </div>
 </x-app-layout>
