@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('portfolios', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->string('title');
-        $table->text('description')->nullable();
-        $table->string('link')->nullable();
-        $table->string('image')->nullable(); // path gambar
-        $table->timestamps();
-    });
-        Schema::table('portfolios', function (Blueprint $table) {
-            $table->index(['user_id', 'title']);
-        });
+    $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->string('title');
+    $table->text('description')->nullable();
+    $table->string('link')->nullable();
+    $table->string('image')->nullable(); // path gambar
+    $table->timestamps();
+});
+Schema::table('portfolios', function (Blueprint $table) {
+    $table->index(['user_id', 'title']);
+});
+
 
     }
 

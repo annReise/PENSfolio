@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Skill extends Model
 {
@@ -14,8 +14,11 @@ class Skill extends Model
         'category',
     ];
 
+    // Relasi many-to-many ke User
     public function users()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)
+                    ->withPivot('level')
+                    ->withTimestamps();
     }
 }

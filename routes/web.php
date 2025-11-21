@@ -1,28 +1,55 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\PublicProfileController;
 
-// HOME
+/*
+|--------------------------------------------------------------------------
+| Public routes (guest & public profile)
+|--------------------------------------------------------------------------
+*/
+
+// Redirect root ke dashboard
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect()->route('dashboard');
 });
 
-// DASHBOARD
-Route::view('/dashboard', 'dashboard')->name('dashboard');
+// Halaman profil publik per-username, misal: /u/demouser
+Route::get('/u/{username}', [PublicProfileController::class, 'show'])
+    ->name('public.profile');
 
-// PORTFOLIO
-Route::view('/portfolio', 'portfolio.index')->name('portfolio.index');
-Route::view('/portfolio/create', 'portfolio.create')->name('portfolio.create'); // <-- dulu ketabrak
-Route::view('/portfolio/{id}/edit', 'portfolio.edit')->name('portfolio.edit');   // <-- letakkan sebelum /{id}
-Route::view('/portfolio/{id}', 'portfolio.show')->name('portfolio.show');        // <-- dinamis paling bawah
+/*
+|--------------------------------------------------------------------------
+| Authenticated routes (harus login & verified)
+|--------------------------------------------------------------------------
+*/
 
-// SKILLS
-Route::view('/skills', 'skills.index')->name('skills.index');
-Route::view('/skills/create', 'skills.create')->name('skills.create');
+Route::middleware(['auth', 'verified'])->group(function () {
 
-// PROFILE
-Route::view('/profile', 'profile.index')->name('profile.index');
-Route::view('/profile/edit', 'profile.edit')->name('profile.edit');
+    // DASHBOARD
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-// PUBLIC PROFILE
-Route::view('/u/{username}', 'public.profile')->name('public.profile');
+    // PROFILE (halaman internal user)
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    // PORTFOLIO CRUD
+    Route::resource('portfolio', PortfolioController::class);
+
+    // SKILLS CRUD (tanpa show)
+    Route::resource('skills', SkillController::class)->except(['show']);
+});
+
+// Route auth dari Breeze (login, register, dll)
+require __DIR__.'/auth.php';
