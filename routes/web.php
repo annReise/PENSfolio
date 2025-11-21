@@ -51,5 +51,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('skills', SkillController::class)->except(['show']);
 });
 
+// Route publik & user biasa kamu (dashboard, profile, portfolio, skills, dll)
+
+// Group khusus admin
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/admin', [AdminDashboardController::class, 'index'])
+        ->name('admin.dashboard');
+});
+
+
 // Route auth dari Breeze (login, register, dll)
 require __DIR__.'/auth.php';
