@@ -4,6 +4,7 @@
         <h1 class="text-3xl font-bold mb-2">
             Halo, {{ auth()->user()->name ?? 'Mahasiswa' }} 👋
         </h1>
+        
         <p class="text-gray-600 mb-6">
             Kelola portofolio, keahlian, dan profil publikmu di sini.
         </p>

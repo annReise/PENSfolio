@@ -17,12 +17,51 @@
                 PENSfolio
             </div>
 
-            <ul class="flex gap-6 font-medium">
-                <li><a href="/dashboard" class="{{ request()->is('dashboard') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Dashboard</a></li>
-                <li><a href="/portfolio" class="{{ request()->is('portfolio*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Portofolio</a></li>
-                <li><a href="/skills" class="{{ request()->is('skills*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Keahlian</a></li>
-                <li><a href="/profile" class="{{ request()->is('profile*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">Profil</a></li>
-            </ul>
+            <ul class="flex gap-6 font-medium items-center">
+    <li>
+        <a href="/dashboard" 
+           class="{{ request()->is('dashboard') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="/portfolio" 
+           class="{{ request()->is('portfolio*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
+            Portofolio
+        </a>
+    </li>
+
+    <li>
+        <a href="/skills" 
+           class="{{ request()->is('skills*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
+            Keahlian
+        </a>
+    </li>
+
+    <li>
+        <a href="/profile" 
+           class="{{ request()->is('profile*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
+            Profil
+        </a>
+    </li>
+
+    {{-- Logout as a normal link --}}
+    @auth
+    <li>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button 
+                type="submit"
+                class="text-gray-700 hover:text-blue-600 transition"
+            >
+                Logout
+            </button>
+        </form>
+    </li>
+    @endauth
+</ul>
+
         </nav>
     </header>
 

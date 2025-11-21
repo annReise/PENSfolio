@@ -6,6 +6,7 @@ use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
@@ -26,20 +27,25 @@ class PortfolioController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'title'       => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'link'        => ['nullable', 'url'],
-            // kalau ada upload gambar, tambahkan rules di sini
-        ]);
+{
+    $validated = $request->validate([
+        'title'       => ['required', 'string', 'max:255'],
+        'description' => ['nullable', 'string'],
+        'link'        => ['nullable', 'url'],
+        'image'       => ['nullable', 'image', 'max:2048'], // <= tambah ini
+    ]);
 
-        $portfolio = $request->user()->portfolios()->create($validated);
-
-        return redirect()
-            ->route('portfolio.index')
-            ->with('success', 'Portofolio berhasil dibuat.');
+    // handle upload gambar
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('portfolios', 'public');
     }
+
+    $portfolio = $request->user()->portfolios()->create($validated);
+
+    return redirect()
+        ->route('portfolio.index')
+        ->with('success', 'Portofolio berhasil dibuat.');
+}
 
     public function show(Portfolio $portfolio): View
     {
@@ -56,21 +62,27 @@ class PortfolioController extends Controller
     }
 
     public function update(Request $request, Portfolio $portfolio): RedirectResponse
-{
-    $this->authorize('update', $portfolio);
+    {
+        $this->authorize('update', $portfolio);
 
-    $validated = $request->validate([
-        'title'       => ['required', 'string', 'max:255'],
-        'description' => ['nullable', 'string'],
-        'link'        => ['nullable', 'url'],
-    ]);
+        $validated = $request->validate([
+            'title'       => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'link'        => ['nullable', 'url'],
+            'image'       => ['nullable', 'image', 'max:2048'],
+        ]);
 
-    $portfolio->update($validated);
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('portfolios', 'public');
+        }
 
-    return redirect()
-        ->route('portfolio.index')
-        ->with('success', 'Portofolio berhasil diupdate.');
-}
+        $portfolio->update($validated);
+
+        return redirect()
+            ->route('portfolio.index')
+            ->with('success', 'Portofolio berhasil diupdate.');
+    }
+
 
     public function destroy(Portfolio $portfolio): RedirectResponse
     {
