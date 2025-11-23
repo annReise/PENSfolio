@@ -24,6 +24,31 @@
                        class="w-full p-3 border rounded-lg">
             </div>
 
+            {{-- DEPARTEMEN --}}
+            <div class="mb-4">
+                <label class="font-semibold">Departemen</label>
+                <select name="department" class="w-full p-3 border rounded-lg">
+                    <option value="">-- Pilih Departemen --</option>
+                    <option value="Teknik Informatika"
+                        {{ old('department', $profile?->department) == 'Departemen Teknik Elektro' ? 'selected' : '' }}>
+                        Departemen Teknik Elektro
+                    </option>
+                    <option value="Teknik Komputer"
+                        {{ old('department', $profile?->department) == 'Departemen Teknik Informatika dan Komputer' ? 'selected' : '' }}>
+                        Departemen Teknik Informatika dan Komputer
+                    </option>
+                    <option value="Teknik Elektro"
+                        {{ old('department', $profile?->department) == 'Departemen Teknik Mekanika dan Energi' ? 'selected' : '' }}>
+                        Departemen Teknik Mekanika dan Energi
+                    </option>
+                    <option value="Teknik Mekatronika"
+                        {{ old('department', $profile?->department) == 'Departemen Teknologi Multimedia Kreatif' ? 'selected' : '' }}>
+                        Departemen Teknologi Multimedia Kreatif
+                    </option>
+                    {{-- Tambah pilihan lain jika perlu --}}
+                </select>
+            </div>
+
             <div class="mb-4">
                 <label class="font-semibold">Tentang Saya</label>
                 <textarea name="bio" class="w-full p-3 border rounded-lg" rows="5">{{ old('bio', $profile?->bio) }}</textarea>

@@ -16,20 +16,22 @@
         </div>
 
         <nav class="mt-4 space-y-1">
-            <a href="{{ route('admin.dashboard') }}"
+            {{-- <a href="{{ route('admin.dashboard') }}"
                class="block px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800' : '' }}">
+                Dashboard
+            </a> --}}
+
+            <a href="{{ route('admin.dashboard') }}"
+            class="block px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800' : '' }}">
                 Dashboard
             </a>
 
-            <a href="{{ route('admin.users.index') }}"
-               class="block px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('admin.users.*') ? 'bg-gray-800' : '' }}">
-                Mahasiswa
+
+            <a href="{{ route('admin.jobs.index') }}"
+            class="block px-4 py-2 hover:bg-gray-800 {{ request()->is('admin/jobs*') ? 'bg-gray-800' : '' }}">
+                Lowongan
             </a>
 
-            <a href="{{ route('dashboard') }}"
-               class="block px-4 py-2 hover:bg-gray-800">
-                Kembali ke User Dashboard
-            </a>
         </nav>
     </aside>
 

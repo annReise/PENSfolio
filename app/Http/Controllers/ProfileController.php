@@ -50,6 +50,7 @@ class ProfileController extends Controller
     $validated = $request->validate([
         'username' => 'required|string|max:50|unique:profiles,username,' . optional($profile)->id,
         'headline' => 'nullable|string|max:255',
+        'department' => 'nullable|string|max:100',
         'bio'      => 'nullable|string',
         'website'  => 'nullable|url|max:255',
         'linkedin' => 'nullable|url|max:255',
@@ -69,6 +70,7 @@ class ProfileController extends Controller
     $profileData = [
         'username' => $validated['username'],
         'headline' => $validated['headline'] ?? null,
+        'department' => $validated['department'] ?? null,
         'bio'      => $validated['bio'] ?? null,
         'website'  => $validated['website'] ?? null,
         'linkedin' => $validated['linkedin'] ?? null,

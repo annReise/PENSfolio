@@ -18,18 +18,28 @@
             <tbody>
                 @foreach($users as $u)
                     <tr class="border-b">
-                        <td class="py-2">{{ $u->name }}</td>
+                        <td class="py-2">
+                            @if($u->profile?->username)
+                                <a href="{{ route('public.profile', $u->profile->username) }}"
+                                class="text-indigo-600 hover:underline">
+                                    {{ $u->name }}
+                                </a>
+                            @else
+                                {{ $u->name }}
+                            @endif
+                        </td>
                         <td class="py-2">{{ $u->email }}</td>
                         <td class="py-2 capitalize">{{ $u->role ?? 'mahasiswa' }}</td>
                         <td class="py-2">
                             <a href="{{ route('admin.users.show', $u) }}"
-                               class="text-indigo-600 hover:underline text-xs">
+                            class="text-indigo-600 hover:underline text-xs">
                                 Detail
                             </a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
+
         </table>
 
         <div class="mt-4">

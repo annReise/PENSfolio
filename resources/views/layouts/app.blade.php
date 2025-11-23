@@ -10,8 +10,6 @@
 
 <body class="min-h-screen flex flex-col" style="background: linear-gradient(180deg, #1e3a5f 0%, #4a7ba7 100%);">
 
-
-
     {{-- HEADER --}}
     <header class="bg-white border-b sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -19,8 +17,8 @@
             {{-- LOGO --}}
             <div>
                 <img src="{{ asset('images/pensfolio (3).png') }}" 
-                alt="PENSfolio" 
-                class="h-16 hover:opacity-80 transition -my-2">
+                     alt="PENSfolio" 
+                     class="h-16 hover:opacity-80 transition -my-2">
             </div>
 
             {{-- MENU --}}
@@ -47,6 +45,13 @@
                     </a>
                 </li>
 
+                {{-- LINK LOWONGAN --}}
+                <li>
+                    <a href="/jobs"
+                       class="{{ request()->is('jobs*') ? 'text-blue-900 font-semibold' : 'text-gray-700 hover:text-blue-900' }}">
+                        Lowongan
+                    </a>
+                </li>
 
                 {{-- USER DROPDOWN --}}
                 @auth
@@ -87,7 +92,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Logout
                                 </button>
                             </form>
@@ -107,8 +112,8 @@
 
     {{-- FOOTER --}}
     <footer class="bg-gray-900 text-white text-center py-4 mt-10">
-    <p class="text-sm">PENSfolio © {{ date('Y') }} - All rights reserved</p>
-</footer>
+        <p class="text-sm">PENSfolio © {{ date('Y') }} - All rights reserved</p>
+    </footer>
 
 </body>
 </html>
