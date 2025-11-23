@@ -38,7 +38,7 @@
 
                     <a
                         href="{{ route('profile.edit') }}"
-                        class="mt-4 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     >
                         Edit Profil
                     </a>
@@ -54,7 +54,7 @@
                     </div>
 
                     <div>
-                        <h3 class="font-semibold text-gray-800 mb-1">Kontak & Sosial</h3>
+                        <h3 class="font-semibold text-gray-800 mb-1">Kontak & Sosial Media</h3>
                         <ul class="text-sm text-indigo-700 space-y-1">
                             @if ($profile && $profile->website)
                                 <li>
