@@ -14,34 +14,34 @@
                 @method('PUT')
 
                 <div class="mb-4">
-                    <x-input-label for="current_password" value="Password Lama" />
-                    <x-text-input id="current_password"
-                                  type="password"
-                                  name="current_password"
-                                  class="mt-1 block w-full"
-                                  autocomplete="current-password" />
-                    <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
-                </div>
+                <x-input-label for="current_password" value="Password Lama" />
+                <x-text-input id="current_password"
+                            type="password"
+                            name="current_password"
+                            class="mt-1 block w-full"
+                            autocomplete="current-password" />
+                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            </div>
 
-                <div class="mb-4">
-                    <x-input-label for="password" value="Password Baru" />
-                    <x-text-input id="password"
-                                  type="password"
-                                  name="password"
-                                  class="mt-1 block w-full"
-                                  autocomplete="new-password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
+            <div class="mb-4">
+                <x-input-label for="password" value="Password Baru" />
+                <x-text-input id="password"
+                            type="password"
+                            name="password"
+                            class="mt-1 block w-full"
+                            autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            </div>
 
-                <div class="mb-4">
-                    <x-input-label for="password_confirmation" value="Konfirmasi Password Baru" />
-                    <x-text-input id="password_confirmation"
-                                  type="password"
-                                  name="password_confirmation"
-                                  class="mt-1 block w-full"
-                                  autocomplete="new-password" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                </div>
+            <div class="mb-4">
+                <x-input-label for="password_confirmation" value="Konfirmasi Password Baru" />
+                <x-text-input id="password_confirmation"
+                            type="password"
+                            name="password_confirmation"
+                            class="mt-1 block w-full"
+                            autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            </div>
 
                 <x-primary-button>
                     Simpan Password

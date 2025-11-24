@@ -52,13 +52,52 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // Route publik & user biasa kamu (dashboard, profile, portfolio, skills, dll)
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminJobController;
+use App\Http\Middleware\EnsureUserIsAdmin;
+
 
 // Group khusus admin
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('/admin', [AdminDashboardController::class, 'index'])
-        ->name('admin.dashboard');
-});
+Route::middleware(['auth', 'verified', EnsureUserIsAdmin::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
+        // Dashboard admin
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        // Kelola user (mahasiswa)
+        Route::get('/users', [AdminUserController::class, 'index'])
+            ->name('users.index');
+
+        Route::get('/users/{user}', [AdminUserController::class, 'show'])
+            ->name('users.show');
+
+        // (opsional) hapus user
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])
+            ->name('users.destroy');
+
+        // CRUD lowongan
+        // Route::resource('jobs', AdminJobController::class);
+        // LOWONGAN - CRUD oleh admin
+        Route::get('/jobs', [AdminJobController::class, 'index'])->name('jobs.index');
+        Route::get('/jobs/create', [AdminJobController::class, 'create'])->name('jobs.create');
+        Route::post('/jobs', [AdminJobController::class, 'store'])->name('jobs.store');
+        Route::get('/jobs/{job}/edit', [AdminJobController::class, 'edit'])->name('jobs.edit');
+        Route::put('/jobs/{job}', [AdminJobController::class, 'update'])->name('jobs.update');
+        Route::delete('/jobs/{job}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
+    });
+
+use App\Http\Controllers\JobController;
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // ... route lain ...
+
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+    Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+});
 
 // Route auth dari Breeze (login, register, dll)
 require __DIR__.'/auth.php';

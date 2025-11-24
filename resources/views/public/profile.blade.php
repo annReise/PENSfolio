@@ -14,6 +14,14 @@
 
             <div class="flex-1">
                 <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
+
+                {{-- DEPARTEMEN --}}
+                @if($profile->department)
+                    <p class="text-sm text-gray-700 mt-1">
+                        Departemen: <span class="font-medium">{{ $profile->department }}</span>
+                    </p>
+                @endif
+                
                 <p class="text-gray-500 text-sm">
                     {{ $profile->headline ?? 'Mahasiswa PENS' }}
                 </p>

@@ -13,6 +13,7 @@ class Profile extends Model
         'user_id',
         'username',
         'headline',
+        'department',
         'bio',
         'avatar',
         'website',
