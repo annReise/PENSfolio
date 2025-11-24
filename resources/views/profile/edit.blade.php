@@ -29,23 +29,22 @@
                 <label class="font-semibold">Departemen</label>
                 <select name="department" class="w-full p-3 border rounded-lg">
                     <option value="">-- Pilih Departemen --</option>
-                    <option value="Teknik Informatika"
-                        {{ old('department', $profile?->department) == 'Departemen Teknik Elektro' ? 'selected' : '' }}>
-                        Departemen Teknik Elektro
-                    </option>
-                    <option value="Teknik Komputer"
-                        {{ old('department', $profile?->department) == 'Departemen Teknik Informatika dan Komputer' ? 'selected' : '' }}>
-                        Departemen Teknik Informatika dan Komputer
-                    </option>
-                    <option value="Teknik Elektro"
-                        {{ old('department', $profile?->department) == 'Departemen Teknik Mekanika dan Energi' ? 'selected' : '' }}>
-                        Departemen Teknik Mekanika dan Energi
-                    </option>
-                    <option value="Teknik Mekatronika"
-                        {{ old('department', $profile?->department) == 'Departemen Teknologi Multimedia Kreatif' ? 'selected' : '' }}>
-                        Departemen Teknologi Multimedia Kreatif
-                    </option>
-                    {{-- Tambah pilihan lain jika perlu --}}
+
+                    @php
+                        $departments = [
+                            'Departemen Teknik Elektro',
+                            'Departemen Teknik Informatika dan Komputer',
+                            'Departemen Teknik Mekanika dan Energi',
+                            'Departemen Teknologi Multimedia Kreatif',
+                        ];
+                        $currentDept = old('department', $profile?->department);
+                    @endphp
+
+                    @foreach ($departments as $dept)
+                        <option value="{{ $dept }}" {{ $currentDept === $dept ? 'selected' : '' }}>
+                            {{ $dept }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
