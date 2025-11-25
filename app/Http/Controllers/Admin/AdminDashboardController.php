@@ -12,13 +12,13 @@ class AdminDashboardController extends Controller
         $totalUsers      = User::count();
         $totalAdmins     = User::where('role', 'admin')->count();
         $totalMahasiswa  = User::where('role', 'mahasiswa')->count();
-        $recentUsers     = User::latest()->take(5)->get();
+        $users = User::latest()->paginate(10);
 
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalAdmins',
             'totalMahasiswa',
-            'recentUsers'
+            'users'
         ));
     }
 }
