@@ -8,16 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-        $table->string('role')->default('mahasiswa')->after('password');
-    });
-
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->string('department', 100)->nullable()->after('headline');
+        });
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->dropColumn('department');
         });
     }
 };

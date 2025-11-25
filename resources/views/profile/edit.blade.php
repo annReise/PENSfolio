@@ -24,6 +24,30 @@
                        class="w-full p-3 border rounded-lg">
             </div>
 
+            {{-- DEPARTEMEN --}}
+            <div class="mb-4">
+                <label class="font-semibold">Departemen</label>
+                <select name="department" class="w-full p-3 border rounded-lg">
+                    <option value="">-- Pilih Departemen --</option>
+
+                    @php
+                        $departments = [
+                            'Departemen Teknik Elektro',
+                            'Departemen Teknik Informatika dan Komputer',
+                            'Departemen Teknik Mekanika dan Energi',
+                            'Departemen Teknologi Multimedia Kreatif',
+                        ];
+                        $currentDept = old('department', $profile?->department);
+                    @endphp
+
+                    @foreach ($departments as $dept)
+                        <option value="{{ $dept }}" {{ $currentDept === $dept ? 'selected' : '' }}>
+                            {{ $dept }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="mb-4">
                 <label class="font-semibold">Tentang Saya</label>
                 <textarea name="bio" class="w-full p-3 border rounded-lg" rows="5">{{ old('bio', $profile?->bio) }}</textarea>

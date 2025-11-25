@@ -114,6 +114,14 @@
                                 <div class="text-center space-y-2">
                                     <h4 class="font-bold text-gray-900 text-lg">{{ $s->name }}</h4>
                                     
+                                    {{-- DEPARTEMEN --}}
+                                    @if($p?->department)
+                                        <p class="text-xs text-gray-500">
+                                            {{ $p->department }}
+                                        </p>
+                                    @endif
+                                        
+                                    {{-- Headline --}}
                                     <p class="text-sm text-gray-600 min-h-[2.5rem] line-clamp-2">
                                         {{ $p?->headline ?? 'Mahasiswa PENS' }}
                                     </p>

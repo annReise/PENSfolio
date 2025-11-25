@@ -9,6 +9,17 @@
         </p>
     </header>
 
+    {{-- ALERT GLOBAL JIKA ADA ERROR DI BAG updatePassword --}}
+    @if ($errors->updatePassword->any())
+        <div class="mt-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <ul class="list-disc list-inside space-y-1">
+                @foreach ($errors->updatePassword->all() as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
@@ -40,7 +51,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
+                    class="text-sm text-green-600"
                 >{{ __('Saved.') }}</p>
             @endif
         </div>

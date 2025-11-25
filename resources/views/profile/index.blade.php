@@ -30,6 +30,15 @@
                     @endif
 
                     <p class="font-semibold">{{ $user->name }}</p>
+
+                    {{-- DEPARTEMEN --}}
+                    @if ($profile && $profile->department)
+                        <p class="text-xs text-gray-600 mt-1">
+                            {{ $profile->department }}
+                        </p>
+                    @endif
+                    
+                    {{-- Headline --}}  
                     @if ($profile && $profile->headline)
                         <p class="text-sm text-gray-600 text-center mt-1">
                             {{ $profile->headline }}

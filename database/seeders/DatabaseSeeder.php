@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             DemoUserSeeder::class,
             SkillSeeder::class,
             PortfolioSeeder::class,
+            AdminUserSeeder::class,
         ]);
     }
 }
