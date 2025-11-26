@@ -35,20 +35,28 @@
                 @enderror
             </div>
 
-<div class="mt-4">
-        <label class="block text-sm font-medium text-gray-700" for="image">Gambar (opsional)</label>
-        <input
-            id="image"
-            type="file"
-            name="image"
-            class="mt-1 block w-full text-sm text-gray-700"
-        >
-        <x-input-error :messages="$errors->get('image')" class="mt-2" />
-    </div>
+<div class="mt-4 mb-6">
+   <label class="block font-semibold mb-1">Gambar Proyek (opsional)</label>
+    <label
+    class="flex items-center gap-2 px-4 py-2 bg-blue-900 text-white border border-blue-900 rounded-md cursor-pointer
+           hover:bg-blue-800 active:bg-blue-950 transition w-max text-sm font-medium shadow-sm mt-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+              d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M4 8v8m16-8v8M12 4v12m0-12L8 8m4-4l4 4" />
+    </svg>
+    Pilih Gambar
+    <input type="file" name="image" class="hidden">
+</label>
+</div>
 
-    <x-primary-button class="mt-4">
-        Simpan
-    </x-primary-button>
+
+
+    <button type="submit"
+    class="mt-4 px-5 py-2 bg-blue-900 text-white font-medium border border-blue-900 rounded-md
+           hover:bg-blue-800 active:bg-blue-950 transition">
+    Simpan
+</button>
+
         </form>
 
     </div>

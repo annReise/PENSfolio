@@ -12,17 +12,17 @@
 
     {{-- HEADER --}}
     <header class="bg-white border-b sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
 
-            {{-- LOGO --}}
-            <div>
-                <img src="{{ asset('images/pensfolio (3).png') }}" 
-                     alt="PENSfolio" 
-                     class="h-16 hover:opacity-80 transition -my-2">
-            </div>
+        {{-- LOGO --}}
+        <div class="flex-shrink-0">
+            <img src="{{ asset('images/pensfolio (3).png') }}" 
+            alt="PENSfolio" 
+            class="h-10 sm:h-16 hover:opacity-80 transition -my-1 sm:-my-2">
+        </div>
 
-            {{-- MENU --}}
-            <ul class="flex gap-8 font-medium items-center">
+        {{-- MENU --}}
+        <ul class="flex gap-3 sm:gap-8 font-medium items-center text-sm sm:text-base">
 
                 <li>
                     <a href="/dashboard"

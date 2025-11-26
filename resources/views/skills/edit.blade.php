@@ -24,9 +24,12 @@
                 @enderror
             </div>
 
-            <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                Update
-            </button>
+            
+    <button type="submit"
+    class="mt-4 px-5 py-2 bg-blue-900 text-white font-medium border border-blue-900 rounded-md
+           hover:bg-blue-800 active:bg-blue-950 transition">
+    Simpan
+</button>
         </form>
     </div>
 </x-app-layout>
