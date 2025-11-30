@@ -9,7 +9,7 @@
             @csrf
 
             <div class="mb-4">
-                <label class="font-semibold">Nama Proyek</label>
+                <label class="font-semibold">Nama Portfolio</label>
                 <input type="text" name="title" value="{{ old('title') }}"
                        class="w-full p-3 border rounded-lg">
                 @error('title')
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="font-semibold">Link Proyek (opsional)</label>
+                <label class="font-semibold">Link Portfolio (opsional)</label>
                 <input type="text" name="link" value="{{ old('link') }}"
                        class="w-full p-3 border rounded-lg">
                 @error('link')
@@ -36,7 +36,7 @@
             </div>
 
 <div class="mt-4 mb-6">
-   <label class="block font-semibold mb-1">Gambar Proyek (opsional)</label>
+   <label class="block font-semibold mb-1">Gambar Portfolio (opsional)</label>
     <label
     class="flex items-center gap-2 px-4 py-2 bg-blue-900 text-white border border-blue-900 rounded-md cursor-pointer
            hover:bg-blue-800 active:bg-blue-950 transition w-max text-sm font-medium shadow-sm mt-2">

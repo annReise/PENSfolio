@@ -10,7 +10,7 @@
             @method('PUT')
 
             <div class="mb-4">
-                <label class="font-semibold">Nama Proyek</label>
+                <label class="font-semibold">Nama Portfolio</label>
                 <input type="text" name="title"
                        value="{{ old('title', $portfolio->title) }}"
                        class="w-full p-3 border rounded-lg">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="font-semibold">Link Proyek (opsional)</label>
+                <label class="font-semibold">Link Portfolio (opsional)</label>
                 <input type="text" name="link"
                        value="{{ old('link', $portfolio->link) }}"
                        class="w-full p-3 border rounded-lg">
