@@ -74,20 +74,60 @@
                        class="w-full p-3 border rounded-lg">
             </div>
 
+            {{-- FOTO PROFIL (dibuat mirip portofolio) --}}
             <div class="mb-4">
                 <label class="font-semibold">Foto Profil</label>
-                <input type="file" name="avatar" class="w-full p-3 border rounded-lg">
+
                 @if ($profile?->avatar)
                     <p class="mt-2 text-sm text-gray-600">Foto sekarang:</p>
-                    <img src="{{ asset('storage/'.$profile->avatar) }}" class="w-20 h-20 rounded-full mt-1">
+                    <img src="{{ asset('storage/'.$profile->avatar) }}"
+                         class="w-20 h-20 rounded-full mt-1 mb-2">
                 @endif
+
+                <label
+                    class="flex items-center gap-2 px-4 py-2 bg-blue-900 text-white border border-blue-900 rounded-md cursor-pointer
+                           hover:bg-blue-800 active:bg-blue-950 transition w-max text-sm font-medium shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                              d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M4 8v8m16-8v8M12 4v12m0-12L8 8m4-4l4 4" />
+                    </svg>
+                    Pilih Foto
+                    <input type="file" name="avatar" class="hidden">
+                </label>
+
+                <span id="file-name" class="text-sm text-gray-600 ml-1"></span>
+
+                @error('avatar')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            {{-- Tombol Simpan (disamakan dengan portofolio) --}}
+            <button type="submit"
+                    class="mt-4 px-5 py-2 bg-blue-900 text-white font-medium border border-blue-900 rounded-md
+                           hover:bg-blue-800 active:bg-blue-950 transition">
                 Simpan Perubahan
             </button>
 
         </form>
 
     </div>
+
+    {{-- Script untuk menampilkan nama file (sama seperti portofolio) --}}
+    <script>
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function () {
+                const name = this.files[0] ? this.files[0].name : '';
+                this.closest('label').nextElementSibling?.remove();
+
+                const span = document.createElement('span');
+                span.className = 'text-sm text-gray-600 ml-1 block mt-1';
+                span.textContent = name;
+
+                this.closest('label').after(span);
+            });
+        });
+    </script>
+
 </x-app-layout>
