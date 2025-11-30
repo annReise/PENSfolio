@@ -17,7 +17,7 @@
             <div class="mb-6 flex justify-end">
                 <a href="{{ route('portfolio.create') }}"
                     class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md hover:bg-blue-800 transition">
-                    + Tambah Proyek
+                    + Tambah Portofolio
                 </a>
             </div>
 
@@ -47,7 +47,7 @@
                             @if ($portfolio->link)
                                 <a href="{{ $portfolio->link }}" target="_blank"
                                    class="inline-block text-xs text-blue-900 font-semibold underline hover:text-blue-700">
-                                    Lihat Proyek →
+                                    Lihat Portofolio →
                                 </a>
                             @endif
 
@@ -72,10 +72,10 @@
                     </div>
                 @empty
                     <div class="col-span-3 text-center py-12">
-                        <p class="text-gray-100 text-lg">Belum ada proyek portofolio</p>
+                        <p class="text-gray-100 text-lg">Belum ada portofolio</p>
                         <a href="{{ route('portfolio.create') }}"
                            class="inline-block mt-7 px-5 py-2 bg-blue-600 text-white text-base font-semibold rounded-md hover:bg-blue-800 transition">
-                            Buat Proyek Pertama
+                            Buat Portofolio Pertama
                         </a>
                     </div>
                 @endforelse
