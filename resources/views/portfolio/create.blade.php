@@ -47,6 +47,9 @@
     Pilih Gambar
     <input type="file" name="image" class="hidden">
 </label>
+
+
+<span id="file-name" class="text-sm text-gray-600 ml-1"></span>
 </div>
 
 
@@ -60,4 +63,20 @@
         </form>
 
     </div>
+
+    <script>
+document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function () {
+        const name = this.files[0] ? this.files[0].name : '';
+        this.closest('label').nextElementSibling?.remove();
+        
+        const span = document.createElement('span');
+        span.className = 'text-sm text-gray-600 ml-1 block mt-1';
+        span.textContent = name;
+
+        this.closest('label').after(span);
+    });
+});
+</script>
+
 </x-app-layout>
