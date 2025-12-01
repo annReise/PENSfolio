@@ -31,7 +31,7 @@ class AdminUserController extends Controller
         $user->delete();
 
         return redirect()
-            ->route('admin.users.index')
+            ->route('admin.dashboard')
             ->with('success', 'User berhasil dihapus.');
     }
 }
