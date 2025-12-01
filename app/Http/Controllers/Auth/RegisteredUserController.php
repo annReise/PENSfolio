@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.')->withHeaders(['Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+        'Pragma' => 'no-cache', 'Expires' => '0']);
     }
 }
