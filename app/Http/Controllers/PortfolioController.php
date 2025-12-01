@@ -27,25 +27,25 @@ class PortfolioController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-{
-    $validated = $request->validate([
-        'title'       => ['required', 'string', 'max:255'],
-        'description' => ['nullable', 'string'],
-        'link'        => ['nullable', 'url'],
-        'image'       => ['nullable', 'image', 'max:2048'], // <= tambah ini
-    ]);
+    {
+        $validated = $request->validate([
+            'title'       => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'link'        => ['nullable', 'url'],
+            'image'       => ['nullable', 'image', 'max:2048'], // <= tambah ini
+        ]);
 
-    // handle upload gambar
-    if ($request->hasFile('image')) {
-        $validated['image'] = $request->file('image')->store('portfolios', 'public');
+        // handle upload gambar
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('portfolios', 'public');
+        }
+
+        $portfolio = $request->user()->portfolios()->create($validated);
+
+        return redirect()
+            ->route('portfolio.index')
+            ->with('success', 'Portofolio berhasil dibuat.');
     }
-
-    $portfolio = $request->user()->portfolios()->create($validated);
-
-    return redirect()
-        ->route('portfolio.index')
-        ->with('success', 'Portofolio berhasil dibuat.');
-}
 
     public function show(Portfolio $portfolio): View
     {

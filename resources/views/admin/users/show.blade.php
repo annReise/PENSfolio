@@ -143,38 +143,38 @@
                     </div>
                     <h2 class="text-xl font-bold text-gray-800">Portofolio</h2>
                     <span class="ml-auto text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full font-semibold">
-                        {{ $user->portfolios->count() }} proyek
+                        {{ $user->portfolios->count() }} portfolio
                     </span>
                 </div>
 
                 @if($user->portfolios->count())
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    @foreach($user->portfolios as $p)
-        <div class="p-4 bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-gray-200 rounded-lg hover:shadow-md transition">
-            <div class="flex items-start justify-between gap-4">
-                <div class="flex-1">
-                    <h3 class="font-bold text-gray-800 mb-1">{{ $p->title }}</h3>
-                    @if($p->description)
-                        <p class="text-sm text-gray-600 mb-2 line-clamp-2">{{ $p->description }}</p>
-                    @endif
-                    @if($p->link)
-                        <a href="{{ $p->link }}" target="_blank"
-                           class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                            Lihat Proyek
-                        </a>
-                    @endif
-                </div>
-                @if($p->image)
-                    <img src="{{ asset('storage/'.$p->image) }}" alt="{{ $p->title }}"
-                         class="w-20 h-20 rounded-lg object-cover">
-                @endif
-            </div>
-        </div>
-    @endforeach
-</div>
+                        @foreach($user->portfolios as $p)
+                            <div class="p-4 bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-gray-200 rounded-lg hover:shadow-md transition">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-gray-800 mb-1">{{ $p->title }}</h3>
+                                        @if($p->description)
+                                            <p class="text-sm text-gray-600 mb-2 line-clamp-2">{{ $p->description }}</p>
+                                        @endif
+                                        @if($p->link)
+                                            <a href="{{ $p->link }}" target="_blank"
+                                            class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                                </svg>
+                                                Lihat Portfolio
+                                            </a>
+                                        @endif
+                                    </div>
+                                    @if($p->image)
+                                        <img src="{{ asset('storage/'.$p->image) }}" alt="{{ $p->title }}"
+                                            class="w-20 h-20 rounded-lg object-cover">
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
                 @else
                     <p class="text-gray-500 text-sm italic">Belum menambahkan portofolio.</p>

@@ -40,6 +40,6 @@ class JobSeeder extends Seeder
             ->fullTime()
             ->create();
        
-        $this->command->info('✅ Berhasil membuat ' . Job::count() . ' job listings!');
+        $this->command->info('Berhasil membuat ' . Job::count() . ' job listings!');
     }
 }
