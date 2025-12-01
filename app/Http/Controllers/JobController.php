@@ -12,7 +12,6 @@ class JobController extends Controller
      */
     public function index()
     {
-        // Bisa tambahkan filter nanti (lokasi, tipe, dsb)
         $jobs = Job::latest()->paginate(10);
 
         return view('jobs.index', compact('jobs'));

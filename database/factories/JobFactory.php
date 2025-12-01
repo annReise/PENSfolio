@@ -88,7 +88,7 @@ class JobFactory extends Factory
             'Freelance',
         ];
 
-        // ✅ Generate logo URL menggunakan UI Avatars
+        // Generate logo URL menggunakan UI Avatars
         $logoUrl = $this->generateCompanyLogo($companyName);
 
         return [
@@ -105,7 +105,7 @@ class JobFactory extends Factory
     }
 
     /**
-     * ✅ Generate company logo URL menggunakan UI Avatars API
+     * Generate company logo URL menggunakan UI Avatars API
      */
     protected function generateCompanyLogo(string $companyName): string
     {
@@ -133,7 +133,7 @@ class JobFactory extends Factory
         
         $bgColor = fake()->randomElement($colors);
         
-        // ✅ Build UI Avatars URL dengan parameter lengkap
+        //Build UI Avatars URL dengan parameter lengkap
         $params = [
             'name' => $name,
             'size' => '200',              // Ukuran 200x200

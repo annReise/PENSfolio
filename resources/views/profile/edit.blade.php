@@ -103,7 +103,6 @@
                 @enderror
             </div>
 
-            {{-- Tombol Simpan (disamakan dengan portofolio) --}}
             <button type="submit"
                     class="mt-4 px-5 py-2 bg-blue-900 text-white font-medium border border-blue-900 rounded-md
                            hover:bg-blue-800 active:bg-blue-950 transition">
@@ -114,7 +113,6 @@
 
     </div>
 
-    {{-- Script untuk menampilkan nama file (sama seperti portofolio) --}}
     <script>
         document.querySelectorAll('input[type="file"]').forEach(input => {
             input.addEventListener('change', function () {

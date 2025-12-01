@@ -11,20 +11,20 @@
             {{-- Company Header Card --}}
             <div class="bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl rounded-xl p-8 mb-6">
                 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
-                     @php
-    if ($job->company_logo) {
-        // Kalau logo adalah URL dari UI Avatar
-        if (Str::startsWith($job->company_logo, ['http://', 'https://'])) {
-            $logo = $job->company_logo;
-        } 
-        // Kalau logo adalah path lokal dari storage
-        else {
-            $logo = asset('storage/'.$job->company_logo);
-        }
-    } else {
-        $logo = 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=100&background=3b82f6&color=fff';
-    }
-@endphp
+                    @php
+                        if ($job->company_logo) {
+                            // Kalau logo adalah URL dari UI Avatar
+                            if (Str::startsWith($job->company_logo, ['http://', 'https://'])) {
+                                $logo = $job->company_logo;
+                            } 
+                            // Kalau logo adalah path lokal dari storage
+                            else {
+                                $logo = asset('storage/'.$job->company_logo);
+                            }
+                        } else {
+                            $logo = 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=100&background=3b82f6&color=fff';
+                        }
+                    @endphp
 
                     <div class="bg-white p-3 rounded-xl shadow-lg">
                         <img src="{{ $logo }}" alt="Logo {{ $job->company_name }}"
@@ -118,16 +118,14 @@
                     @endif
 
                     <a href="{{ route('jobs.index') }}"
-   class="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-blue-600 text-blue-600 bg-white text-base font-semibold rounded-lg hover:bg-blue-600 hover:text-white active:bg-blue-700 transition-all duration-200">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-    </svg>
-    Kembali ke Daftar
-</a>
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-blue-600 text-blue-600 bg-white text-base font-semibold rounded-lg hover:bg-blue-600 hover:text-white active:bg-blue-700 transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Kembali ke Daftar
+                    </a>
                 </div>
-
             </div>
-
         </div>
     </div>
 </x-app-layout>
