@@ -94,7 +94,7 @@ class JobFactory extends Factory
         return [
             'title' => fake()->randomElement($jobTitles),
             'company_name' => $companyName,
-            'company_logo' => fake()->optional(0.7)->passthrough($logoUrl), // 70% ada logo
+            'company_logo' => $logoUrl, // 70% ada logo
             'description' => $this->generateJobDescription(),
             'requirements' => $this->generateRequirements(),
             'location' => fake()->randomElement($locations) . ', Indonesia',
