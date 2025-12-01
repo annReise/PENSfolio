@@ -52,5 +52,5 @@ class DashboardController extends Controller
             'totalStudents'  => $totalStudents,
             'totalPortfolios'=> $totalPortfolios,
         ]);
-}
+    }
 }

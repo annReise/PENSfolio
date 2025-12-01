@@ -23,7 +23,6 @@ class AdminUserController extends Controller
 
     public function destroy(User $user)
     {
-        // Opsional: cegah admin hapus dirinya sendiri
         if (auth()->id() === $user->id) {
             return back()->with('error', 'Tidak bisa menghapus akun sendiri.');
         }
