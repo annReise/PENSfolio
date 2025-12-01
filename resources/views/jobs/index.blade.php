@@ -41,10 +41,20 @@
                             <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
                                 <div class="flex items-start gap-4">
                                     @php
-                                        $logo = $job->company_logo
-                                            ? asset('storage/'.$job->company_logo)
-                                            : 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=100&background=3b82f6&color=fff';
-                                    @endphp
+    if ($job->company_logo) {
+        // Kalau logo adalah URL dari UI Avatar
+        if (Str::startsWith($job->company_logo, ['http://', 'https://'])) {
+            $logo = $job->company_logo;
+        } 
+        // Kalau logo adalah path lokal dari storage
+        else {
+            $logo = asset('storage/'.$job->company_logo);
+        }
+    } else {
+        $logo = 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=100&background=3b82f6&color=fff';
+    }
+@endphp
+
                                     
                                     <div class="bg-white p-2 rounded-lg shadow-md">
                                         <img src="{{ $logo }}" alt="Logo {{ $job->company_name }}"

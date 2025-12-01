@@ -84,7 +84,7 @@
     {{-- User Terbaru Table --}}
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-            <h2 class="text-lg font-bold text-gray-900">User Terbaru</h2>
+            <h2 class="text-lg font-bold text-gray-900">Daftar User</h2>
             <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
                 {{ $users->count() }} users
             </span>

@@ -11,11 +11,20 @@
             {{-- Company Header Card --}}
             <div class="bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl rounded-xl p-8 mb-6">
                 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
-                    @php
-                        $logo = $job->company_logo
-                            ? asset('storage/'.$job->company_logo)
-                            : 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=150&background=fff&color=3b82f6';
-                    @endphp
+                     @php
+    if ($job->company_logo) {
+        // Kalau logo adalah URL dari UI Avatar
+        if (Str::startsWith($job->company_logo, ['http://', 'https://'])) {
+            $logo = $job->company_logo;
+        } 
+        // Kalau logo adalah path lokal dari storage
+        else {
+            $logo = asset('storage/'.$job->company_logo);
+        }
+    } else {
+        $logo = 'https://ui-avatars.com/api/?name=' . urlencode($job->company_name) . '&size=100&background=3b82f6&color=fff';
+    }
+@endphp
 
                     <div class="bg-white p-3 rounded-xl shadow-lg">
                         <img src="{{ $logo }}" alt="Logo {{ $job->company_name }}"
